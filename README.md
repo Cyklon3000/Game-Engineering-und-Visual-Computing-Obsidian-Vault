@@ -1,2 +1,3 @@
-# linked-blog-starter-md
-These are the markdown files for the [linked-blog-starter](https://github.com/matthewwong525/linked-blog-starter) repository
+# Game Engineering und Visual Computing Obsidian Vault
+
+Hier werden die Unterlagen aller Kurse zu Backup Zwecken regelmäßig hochgeladen
