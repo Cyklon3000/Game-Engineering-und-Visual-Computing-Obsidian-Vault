@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sekantenverfahren Visualisierung</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        #chartContainer {
+            width: 80%;
+            max-width: 800px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #info {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sekantenverfahren Visualisierung</h1>
+    <div id="chartContainer">
+        <canvas id="myChart"></canvas>
+    </div>
+    <button id="nextStep">Nächster Schritt</button>
+    <div id="info"></div>
+
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        let chart;
+        let a, b, c;
+        let negativeX = -3, positiveX = 3;
+        let iterations = 0;
+        const coefficientsA = [1]; // slope
+        const coefficientsB = [1, 1.5, 2]; // inside shift
+        const coefficientsC = [6, 8, 10, 12] // outside shift
+
+        function randomChoice(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function inRange(n, min, max) {
+            return (min < n) && (n < max)
+        }
+
+        function initFunction() {
+            a = randomChoice(coefficientsA) * (Math.random() < 0.5 ? -1 : 1);
+            b = randomChoice(coefficientsB) * (Math.random() < 0.5 ? -1 : 1);
+            c = randomChoice(coefficientsC) * -Math.sign(a)
+
+            if ((!inRange(f(positiveX), -40, 40)) || (!inRange(f(negativeX), -40, 40))) {
+                initFunction()
+            }
+            
+            if (Math.sign(f(negativeX)) === 1) {
+                negativeX = 3, positiveX = -3;
+            } 
+        }
+
+        function f(x) {
+            return (a*x - a*b) * (a*x - a*c)
+        }
+
+        function generatePoints() {
+            const points = [];
+            for (let x = -10; x <= 10; x += 0.1) {
+                points.push({x: x, y: f(x)});
+            }
+            return points;
+        }
+
+        function updateChart() {
+            const functionPoints = generatePoints();
+            const positivePoint = {x: positiveX, y: f(positiveX)};
+            const negativePoint = {x: negativeX, y: f(negativeX)};
+            
+            const m = (negativePoint.y - positivePoint.y) / (negativePoint.x - positivePoint.x);
+            const xIntercept = positivePoint.x - positivePoint.y / m;
+            const yIntercept = 0;
+
+            if (!chart) {
+                chart = new Chart(ctx, {
+                    type: 'scatter',
+                    data: {
+                        datasets: [
+                            {
+                                label: 'Funktion',
+                                data: functionPoints,
+                                showLine: true,
+                                borderColor: 'blue',
+                                pointRadius: 0
+                            },
+                            {
+                                label: 'Sekante',
+                                data: [positivePoint, negativePoint],
+                                showLine: true,
+                                borderColor: 'red',
+                                pointRadius: 5
+                            },
+                            {
+                                label: 'Schnittpunkt',
+                                data: [{x: xIntercept, y: yIntercept}],
+                                pointBackgroundColor: 'green',
+                                pointRadius: 5
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                type: 'linear',
+                                position: 'bottom',
+                                min: -4,
+                                max: 4
+                            },
+                            y: {
+                                type: 'linear',
+                                position: 'left',
+                                min: -40,
+                                max: 40
+                            }
+                        }
+                    }
+                });
+            } else {
+                chart.data.datasets[0].data = functionPoints;
+                chart.data.datasets[1].data = [positivePoint, negativePoint];
+                chart.data.datasets[2].data = [{x: xIntercept, y: yIntercept}];
+                chart.update();
+            }
+
+            return xIntercept;
+        }
+
+        function nextStep() {
+            iterations++;
+            const xIntercept = updateChart();
+            const yIntercept = f(xIntercept);
+
+            if (Math.abs(yIntercept) < 0.01 || (iterations > 1 && Math.abs(xIntercept - prevIntercept) < 0.01)) {
+                document.getElementById('nextStep').disabled = true;
+                document.getElementById('info').innerHTML = `Konvergenz erreicht nach ${iterations} Iterationen.<br>Nullstelle: x ≈ ${xIntercept.toFixed(4)}`;
+                return;
+            }
+
+            if (yIntercept > 0) {
+                positiveX = xIntercept;
+            } else {
+                negativeX = xIntercept;
+            }
+
+            document.getElementById('info').innerHTML = `Iteration ${iterations}<br>Schittpunktnäherung durch Gerade bei x = ${xIntercept.toFixed(4)}`;
+            prevIntercept = xIntercept;
+        }
+
+        initFunction();
+        updateChart();
+        
+        document.getElementById('nextStep').addEventListener('click', nextStep);
+        nextStep()
+    </script>
+</body>
+</html>
