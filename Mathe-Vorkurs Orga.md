@@ -1,5 +1,5 @@
 #Mathe-Vorkurs #Orga
-- 12 Tage beginnend 11.09.2024
+- 12 Tage beginnend 11.09.2024 endend am 26.09.2024
 - Mathe Grundwissen Wiederholung
 
 ## Literatur
