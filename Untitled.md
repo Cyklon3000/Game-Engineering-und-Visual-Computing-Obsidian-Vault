@@ -1,1 +1,0 @@
-<iframe style="outline: 1px white solid;" src="file:///C:\Users\seide\OneDrive\Dokumente\Obsidian\Game Engineering Kempten\index.html" width="100%" height="600px"></iframe>
