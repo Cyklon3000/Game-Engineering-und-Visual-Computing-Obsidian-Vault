@@ -1,11 +1,12 @@
-## Summen
-$S_n = \sum_{k=1}^n a_k = a_1 + a_2 + ... + a_n$
+$\huge\sum_{k=1}^n a_k = a_1 + a_2 + ... + a_n$
 ### Stationäre Reihe
-Alle Glieder sind konstant: $a_k = c$ $\sum_{k=1}^n c = n \cdot c$ | $\sum_{k=1}^{\infty} c = \infty$
+Alle Glieder sind konstant: $a_k = c$
+$\sum_{k=1}^n c = n \cdot c \quad$| $\sum_{k=1}^{100} 2 = 100 * 2 = 200$
 ### Arithmetische Reihe
 Differenz zweier Glieder ist konstant: $a_{k+1} - a_k = d$ 
 $a_k = a_1 + (k-1)d$ 
-$\sum_{k=1}^n a_k = a_1 + a_2 + ... + a_n = a_1 + (a_1+d) + (a_1+2d) + ... + (a_1+n-1)d) = \frac{a_1+a_n}{2} \cdot n$ 
+$\sum_{k=1}^n a_k = a_1 + a_2 + ... + a_n = a_1 + (a_1+d) + (a_1+2d) + ...$ 
+$$= \frac{a_1+a_n}{2} \cdot n$$
 $\sum_{k=1}^n (a_1+(k-1)d) = \frac{n}{2}(a_n+a_n) = \frac{n}{2}(2a_1+(n-1)*d)$
 Spezialfall: $\sum_{k=1}^n k = \frac{n(n+1)}{2}$
 ### Geometrische Reihe
@@ -14,7 +15,7 @@ $a_k = a_1 \cdot q^{k-1}$
 $\sum_{k=1}^n a_k = S = a_1 \cdot (1 + g + g^2 + g^3 + ... + g^{n-1})$ 
 $S \cdot g = a_1 \cdot (g + g^2 + g^3 + ... + g^n)$
 $S(g-1) = a_1 \cdot (g^n - 1)$
-$S = a_1 \cdot \frac{g^n-1}{g-1}$, $g \neq q$
+$S = a_1 \cdot \frac{g^n-1}{g-1}$, $g \neq 1$
 
 $\huge \sum_{k=1}^n a_1 \cdot q^{k-1} = a_1 \cdot \frac{q^n-1}{q-1}$, $q \neq 1$
 ## Definition: Erfinder des Schachspiels verlangte vom König Sheram

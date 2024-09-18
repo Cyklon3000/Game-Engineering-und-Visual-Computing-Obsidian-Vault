@@ -3,12 +3,6 @@
 Eine Folge ist eine eindeutige Zuordnung $n \in \mathbb{N} \to a_n = f(n)$, wobei $a_n \in \mathbb{R}$
 ## Beispiele
 (Kapital bei Zinssatz, Population, Abschreibungen,...)
-$a_n = 1, 3, 5, 7$ 
-$b_n = 1, 2, 4, 8, 16$ 
-$c_n = \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, \frac{1}{5}$ 
-$d_n = 1, 1, 2, 3, 5, 8, 13, 21, 34$ 
-$e_n = -1, 1, -1, 1, -1, 1$ 
-$f_n = \frac{1}{2}, \frac{2}{3}, \frac{3}{4}, \frac{4}{5}, \frac{5}{6}$
 
 | $a_n = 1, 3, 5, 7$                                                      | $a_k=k$                                                   |
 | ----------------------------------------------------------------------- | --------------------------------------------------------- |
